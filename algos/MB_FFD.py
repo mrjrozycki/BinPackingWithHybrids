@@ -25,6 +25,8 @@ class MB_FFD(Base.Base):
                     break
             else:
                 return
+            if b+1 == self.n_bins+1 and self.inst.items:
+                raise Exception("No bin found for item, to few bins.")
 
 
 
