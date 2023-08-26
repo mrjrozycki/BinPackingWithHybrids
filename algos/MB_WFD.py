@@ -17,7 +17,7 @@ class MB_WFD(Base.Base):
         difference = []
         for i in range(len(bin.get_capacity())):
             difference.append(bin.get_capacity()[i] - item.get_sizes()[i])
-        return max(difference)
+        return min(difference)
             
 
     def run(self):
