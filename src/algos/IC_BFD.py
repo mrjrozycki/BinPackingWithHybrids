@@ -8,12 +8,6 @@ class BFD(Base.Base):
     def __init__(self):
         super().__init__()
 
-    def count_space_left(self, bin, item):
-        difference = []
-        for i in range(len(bin.get_capacity())):
-            difference.append(bin.get_capacity()[i] - item.get_sizes()[i])
-        return min(difference)
-
 
     def run(self):
         self.sort_items()
@@ -28,5 +22,3 @@ class BFD(Base.Base):
             if min_bin is None:
                 min_bin = self.add_bin()
             self.put_item(item, min_bin)
-
-
