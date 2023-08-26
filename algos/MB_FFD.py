@@ -5,7 +5,7 @@ class MB_FFD(Base.Base):
 
     def __init__(self, n_bins=0):
         super().__init__()
-        self.n_bins = int(n_bins)
+        self.n_bins = int(n_bins)+1
 
     def run(self):
         LB = self.calculate_lower_bound()
@@ -23,9 +23,9 @@ class MB_FFD(Base.Base):
                         break
                 else:
                     break
-            else:
+            if len(self.inst.items) == 0:
                 return
-            if b+1 == self.n_bins+1 and self.inst.items:
+            elif b+1 == self.n_bins and self.inst.items:
                 raise Exception("No bin found for item, to few bins.")
 
 
