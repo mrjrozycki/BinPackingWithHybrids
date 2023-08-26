@@ -1,6 +1,6 @@
 import numpy as np
 
-import algos.base as Base
+import base.base as Base
 
 
 class MB_BFD(Base.Base):

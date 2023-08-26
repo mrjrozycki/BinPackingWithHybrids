@@ -1,4 +1,4 @@
-import algos.base as Base
+import base.base as Base
 
 
 class MB_FFD(Base.Base):
