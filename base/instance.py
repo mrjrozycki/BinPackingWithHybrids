@@ -24,7 +24,7 @@ class Instance():
         self.dim = int(self.lines[0])
     
     def set_bin_cap(self):
-        self.cap = self.lines[1].strip().split(",")
+        self.cap = self.lines[1].strip().split(" ")
         self.cap = [int(i) for i in self.cap]
     
     def set_items(self):

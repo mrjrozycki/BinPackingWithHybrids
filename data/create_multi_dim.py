@@ -24,11 +24,14 @@ def create_uniform_instance(n, dim, cap, id = None):
     else:
         f = open(f"data/Multidim/u/uniform_instance_{n}_{dim}_{id}.vbp", "w")
     f.write(f"{dim}\n")
-    f.write(f"{cap}\n")
+    for i in range(dim):
+        f.write(f"{cap[i]} ")
+    f.write("\n")
     f.write(f"{n}\n")
     for i in range(n):
         for j in range(dim):
             f.write(f"{item_sizes[i][j]} ")
+        f.write("1")
         f.write("\n")
     f.close()
     
@@ -69,6 +72,7 @@ def create_triplet_instance(n, dim, cap, id = None):
     for i in range(n):
         for j in range(dim):
             f.write(f"{item_sizes[i][j]} ")
+        f.write("1")
         f.write("\n")
     f.close()
     # print(item_sizes)
