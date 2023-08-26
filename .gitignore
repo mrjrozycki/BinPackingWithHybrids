@@ -1,6 +1,6 @@
 data/Fal*
 data/Multi*
-
+.vscode
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
