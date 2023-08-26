@@ -1,3 +1,5 @@
+import numpy as np
+
 import base.instance as Instance
 import base.bin as Bin
 
@@ -6,7 +8,10 @@ class Base():
     def __init__(self, n_bins=0):
         self.inst = Instance.Instance()
         self.bins = []
-        self.n_bins = int(n_bins)+1
+        if n_bins is not np.inf:
+            self.n_bins = int(n_bins)+1
+        else:
+            self.n_bins = n_bins
 
     def load_instance(self, filename):
         self.inst.read_file(filename)
