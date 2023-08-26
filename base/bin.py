@@ -13,8 +13,16 @@ class Bin():
         return self.capacity
     
     def get_items(self):
+        items = []
         for item in self.items:
-            yield item.get_sizes()
+            items.append(item.get_id())
+        return items
+    
+    def get_items_sizes(self):
+        sizes = []
+        for item in self.items:
+            sizes.append(item.get_sizes())
+        return sizes
     
     def item_fit(self, item):
         for i in range(len(item.get_sizes())):
