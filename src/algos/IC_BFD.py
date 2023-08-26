@@ -24,5 +24,8 @@ class BFD(Base.Base):
             elif min_bin is None and len(self.bins) == self.n_bins:
                 self.inst.items.append(item)
                 return False
-            self.put_item(item, min_bin)
+            if not(self.put_item(item, min_bin)):
+                self.inst.items.append(item)
+                self.bins.remove(min_bin)
+                return False
         return True

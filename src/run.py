@@ -34,7 +34,9 @@ def pick_algo(name, stage=None):
     elif name == "BC":
         algo = BC.BinCentric()
     elif name == "THR_1":
-        algo = THR_BIN_NUM.bin_number(algo1=pick_algo(sys.argv[3], 1), algo2=pick_algo(sys.argv[4], 2))
+        algo = THR_BIN_NUM.bin_number(algo1=pick_algo(sys.argv[3], 1), algo2=pick_algo(sys.argv[4], 2), param=float(sys.argv[5]))
+    elif name == "THR_2":
+        algo = THR_BIN_NUM.bin_cap(algo1=pick_algo(sys.argv[3], 1), algo2=pick_algo(sys.argv[4], 2), param=float(sys.argv[5]))
     else:
         raise ValueError("Invalid algorithm name")
     return algo

@@ -24,7 +24,10 @@ class WFD(Base.Base):
             elif max_bin is None and len(self.bins) == self.n_bins:
                 self.inst.items.append(item)
                 return False
-            self.put_item(item, max_bin)
+            if not(self.put_item(item, max_bin)):
+                self.inst.items.append(item)
+                self.bins.remove(max_bin)
+                return False
         return True
 
 

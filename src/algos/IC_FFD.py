@@ -21,4 +21,7 @@ class FFD(Base.Base):
                 elif len(self.bins) == self.n_bins:
                     self.inst.items.append(item)
                     return False
-                self.put_item(item, bin)
+                if not(self.put_item(item, bin)):
+                    self.inst.items.append(item)
+                    self.bins.remove(bin)
+                    return False
