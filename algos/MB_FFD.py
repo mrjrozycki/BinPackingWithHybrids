@@ -3,15 +3,17 @@ import algos.base as Base
 
 class MB_FFD(Base.Base):
 
-    def __init__(self, n_bins=0, LOWER_BOUND=0):
+    def __init__(self, n_bins=0, LOWER_BOUND=None):
         super().__init__()
         self.n_bins = int(n_bins)+1
-        if LOWER_BOUND == 0:
-            self.LB = self.calculate_lower_bound()
-        else:
+        if LOWER_BOUND is not None:
             self.LB = int(LOWER_BOUND)
+        else:
+            self.LB = None
 
     def run(self):
+        if self.LB is None:
+            self.LB = self.calculate_lower_bound()
         items_copy = self.inst.items.copy()
         for b in range(self.LB, self.n_bins):
             self.bins = []
