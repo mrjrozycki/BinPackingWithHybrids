@@ -3,9 +3,14 @@ import base.bin as Bin
 
 class Base():
 
-    def __init__(self):
+    def __init__(self, n_bins=0, LOWER_BOUND=None):
         self.inst = Instance.Instance()
         self.bins = []
+        self.n_bins = int(n_bins)+1
+        if LOWER_BOUND is not None:
+            self.LB = int(LOWER_BOUND)
+        else:
+            self.LB = None
 
     def load_instance(self, filename):
         self.inst.read_file(filename)

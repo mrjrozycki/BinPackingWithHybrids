@@ -6,12 +6,8 @@ import base.base as Base
 class MB_WFD(Base.Base):
 
     def __init__(self, n_bins=0, LOWER_BOUND=None):
-        super().__init__()
-        self.n_bins = int(n_bins)+1
-        if LOWER_BOUND is not None:
-            self.LB = int(LOWER_BOUND)
-        else:
-            self.LB = None
+        super().__init__(n_bins, LOWER_BOUND)
+
             
 
     def run(self):
