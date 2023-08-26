@@ -5,14 +5,12 @@ import base.base as Base
 
 class MB_WFD(Base.Base):
 
-    def __init__(self, n_bins=0, LOWER_BOUND=None):
-        super().__init__(n_bins, LOWER_BOUND)
+    def __init__(self, n_bins=0):
+        super().__init__(n_bins)
 
             
 
     def run(self):
-        if self.LB is None:
-            self.LB = self.calculate_lower_bound()
         items_copy = self.inst.items.copy()
         for b in range(self.LB, self.n_bins):
             self.bins = []

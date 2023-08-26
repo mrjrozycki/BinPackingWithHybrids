@@ -9,6 +9,7 @@ class Instance():
         self.items = []
         self.dim = -1
         self.cap = []
+        self.lower_bound = None
 
     def read_file(self, filename):
         f = open(filename, 'r')
@@ -19,6 +20,7 @@ class Instance():
         self.set_dim()
         self.set_bin_cap()
         self.set_items()
+        self.set_lower_bound()
     
     def set_dim(self):
         self.dim = int(self.lines[0])
@@ -61,6 +63,9 @@ class Instance():
             if math.ceil(total/self.cap[dim]) > max_n_bins:
                 max_n_bins = math.ceil(total/self.cap[dim])
         return max_n_bins
+    
+    def set_lower_bound(self):
+        self.lower_bound = self.calculate_lower_bound()
 
 
 if __name__ == '__main__':

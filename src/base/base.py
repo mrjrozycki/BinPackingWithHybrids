@@ -3,18 +3,15 @@ import base.bin as Bin
 
 class Base():
 
-    def __init__(self, n_bins=0, LOWER_BOUND=None):
+    def __init__(self, n_bins=0):
         self.inst = Instance.Instance()
         self.bins = []
         self.n_bins = int(n_bins)+1
-        if LOWER_BOUND is not None:
-            self.LB = int(LOWER_BOUND)
-        else:
-            self.LB = None
 
     def load_instance(self, filename):
         self.inst.read_file(filename)
         self.inst.load_instance()
+        self.LB = self.inst.lower_bound
 
     def sort_items(self):
         self.inst.items.sort(key=lambda x: x.get_size(0), reverse=True)
