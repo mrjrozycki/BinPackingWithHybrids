@@ -5,9 +5,13 @@ import algos.base as Base
 
 class MB_BFD(Base.Base):
 
-    def __init__(self, n_bins=0):
+    def __init__(self, n_bins=0, LOWER_BOUND=None):
         super().__init__()
         self.n_bins = int(n_bins)+1
+        if LOWER_BOUND == None:
+            self.LB = self.calculate_lower_bound()
+        else:
+            self.LB = int(LOWER_BOUND)
 
     def count_space_left(self, bin, item):
         difference = []
@@ -18,9 +22,8 @@ class MB_BFD(Base.Base):
 
 # Od chata
     def run(self):
-        LB = self.calculate_lower_bound()
         items_copy = self.inst.items.copy()
-        for b in range(LB, self.n_bins):
+        for b in range(self.LB, self.n_bins):
             self.bins = []
             self.inst.items = items_copy.copy()
             self.sort_items()
