@@ -8,11 +8,18 @@ class MB_FFD(Base.Base):
 
     def run(self):
         items_copy = self.inst.items.copy()
+        bins_copy = self.bins.copy()
+        if self.n_bins <= self.LB:
+            self.LB = self.n_bins
+            self.n_bins+=1
         for b in range(self.LB, self.n_bins):
-            self.bins = []
+            if self.stage == 2:
+                self.bins = bins_copy.copy()
+            else:
+                self.bins = []
             self.inst.items = items_copy.copy()
             self.sort_items()
-            for _ in range(b):
+            for _ in range(b-len(self.bins)):
                 self.add_bin()
             while len(self.inst.items) > 0:
                 item = self.inst.items.pop(0)
@@ -22,9 +29,11 @@ class MB_FFD(Base.Base):
                 else:
                     break
             if len(self.inst.items) == 0:
-                return
-            elif b+1 == self.n_bins and self.inst.items:
+                return True
+            elif b+1 == self.n_bins and self.inst.items and self.stage == None:
                 raise Exception("No bin found for item, to few bins.")
+            elif b+1 == self.n_bins and self.inst.items and self.stage == 1:
+                return False
 
 
 

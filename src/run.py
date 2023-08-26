@@ -9,23 +9,32 @@ import algos.MB_BFD as MB_BFD
 import algos.MB_WFD as MB_WFD
 import algos.Thr_bin_num as Thr_bin_num
 
-def pick_algo(name):
+def pick_algo(name, stage=None):
     if name == "FFD":
         algo = FFD.FFD()
     elif name == "MB_FFD":
-        algo = MB_FFD.MB_FFD(sys.argv[3])
+        if stage == None:
+            algo = MB_FFD.MB_FFD(sys.argv[3])
+        else:
+            algo = MB_FFD.MB_FFD()
     elif name == "BFD":
         algo = BFD.BFD()
     elif name == "MB_BFD":
-        algo = MB_BFD.MB_BFD(sys.argv[3])
+        if stage == None:
+            algo = MB_BFD.MB_BFD(sys.argv[3])
+        else:
+            algo = MB_BFD.MB_BFD()
     elif name == "WFD":
         algo = WFD.WFD()
     elif name == "MB_WFD":
-        algo = MB_WFD.MB_WFD(sys.argv[3])
+        if stage == None:
+            algo = MB_WFD.MB_WFD(sys.argv[3])
+        else:
+            algo = MB_WFD.MB_WFD()
     elif name == "BC":
         algo = BC.BinCentric()
     elif name == "THR_1":
-        algo = Thr_bin_num.bin_number(algo1=pick_algo(sys.argv[3]), algo2=pick_algo(sys.argv[4]))
+        algo = Thr_bin_num.bin_number(algo1=pick_algo(sys.argv[3], 1), algo2=pick_algo(sys.argv[4], 2))
     else:
         raise ValueError("Invalid algorithm name")
     return algo

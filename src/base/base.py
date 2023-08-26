@@ -8,6 +8,7 @@ class Base():
     def __init__(self, n_bins=0):
         self.inst = Instance.Instance()
         self.bins = []
+        self.stage = None
         if n_bins is not np.inf:
             self.n_bins = int(n_bins)+1
         else:
