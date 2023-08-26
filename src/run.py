@@ -7,7 +7,7 @@ import algos.BC as BC
 import algos.MB_FFD as MB_FFD
 import algos.MB_BFD as MB_BFD
 import algos.MB_WFD as MB_WFD
-import algos.Thr_bin_num as Thr_bin_num
+import algos.THR_BIN_NUM as THR_BIN_NUM
 
 def pick_algo(name, stage=None):
     if name == "FFD":
@@ -34,7 +34,7 @@ def pick_algo(name, stage=None):
     elif name == "BC":
         algo = BC.BinCentric()
     elif name == "THR_1":
-        algo = Thr_bin_num.bin_number(algo1=pick_algo(sys.argv[3], 1), algo2=pick_algo(sys.argv[4], 2))
+        algo = THR_BIN_NUM.bin_number(algo1=pick_algo(sys.argv[3], 1), algo2=pick_algo(sys.argv[4], 2))
     else:
         raise ValueError("Invalid algorithm name")
     return algo
