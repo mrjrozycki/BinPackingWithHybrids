@@ -12,12 +12,6 @@ class MB_WFD(Base.Base):
             self.LB = int(LOWER_BOUND)
         else:
             self.LB = None
-
-    def count_space_left(self, bin, item):
-        difference = []
-        for i in range(len(bin.get_capacity())):
-            difference.append(bin.get_capacity()[i] - item.get_sizes()[i])
-        return min(difference)
             
 
     def run(self):

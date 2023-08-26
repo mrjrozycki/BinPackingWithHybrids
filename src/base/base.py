@@ -27,3 +27,9 @@ class Base():
     
     def calculate_lower_bound(self):
         return self.inst.calculate_lower_bound()
+    
+    def count_space_left(self, bin, item):
+        difference = []
+        for i in range(len(bin.get_capacity())):
+            difference.append(bin.get_capacity()[i] - item.get_sizes()[i])
+        return min(difference)
