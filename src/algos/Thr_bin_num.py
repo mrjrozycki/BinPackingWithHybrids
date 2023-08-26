@@ -5,7 +5,7 @@ import base.base as Base
 
 class bin_number(Base.Base):
 
-    def __init__(self, n_bins=0, algo1=None, algo2=None, param=0.5):
+    def __init__(self, n_bins=0, algo1=None, algo2=None, param=1.5):
         super().__init__(n_bins)
         self.algo1 = algo1
         self.algo2 = algo2
@@ -21,6 +21,8 @@ class bin_number(Base.Base):
             print(f"Finding solution failed. Number of filled bins: {len(self.algo1.bins)}")
         else:
             print(f"Solution found. Number of filled bins: {len(self.algo1.bins)}")
+            self.bins = self.algo1.bins.copy()
+            return True
         self.algo2.load_instance(sys.argv[2])
         self.algo2.stage = 2
         self.algo2.bins = self.algo1.bins.copy()
