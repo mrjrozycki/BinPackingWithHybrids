@@ -11,20 +11,14 @@ class MB_BFD(Base.Base):
 
 # Od chata
     def run(self):
-        items_copy = self.inst.items.copy()
-        bins_copy = self.bins.copy()
-        if self.n_bins <= self.LB:
-            self.LB = self.n_bins
-            self.n_bins+=1
+        self.create_copies()
+        self.calibrate_LB_and_n_bins()
         for b in range(self.LB, self.n_bins):
-            if self.stage == 2:
-                self.bins = bins_copy.copy()
-            else:
-                self.bins = []
-            self.inst.items = items_copy.copy()
-            self.sort_items()
-            for _ in range(b-len(self.bins)):
-                self.add_bin()
+            self.maybe_copy_bins()
+            self.copy_and_sort_items()
+            self.put_away_too_big_items()
+            [self.add_bin() for _ in range(b-len(self.bins))]
+
             while self.inst.items:
                 min_space = np.inf
                 min_bin = None
@@ -36,11 +30,14 @@ class MB_BFD(Base.Base):
                 if min_bin is None:
                     break
                 self.put_item(item, min_bin)
-            if len(self.inst.items) == 0:
+            if not self.inst.items and not self.items_too_big:
                 return True
             elif b+1 == self.n_bins and self.inst.items and self.stage == None:
                 raise Exception("No bin found for item, to few bins.")
             elif b+1 == self.n_bins and self.inst.items and self.stage == 1:
+                return False
+            elif b+1 == self.n_bins and self.items_too_big and self.stage == 1:
+                self.return_too_big_items()
                 return False
             
 

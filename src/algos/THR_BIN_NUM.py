@@ -45,10 +45,13 @@ class bin_cap(Base.Base):
         self.algo1.load_instance(sys.argv[2])
         self.algo1.stage = 1
         self.algo1.n_bins = math.ceil(self.algo1.inst.lower_bound)
+
         cap_copy = self.algo1.inst.cap.copy()
-        cap_for_adding = np.array(self.algo1.inst.cap) - (np.array(self.algo1.inst.cap)*self.param)
+        cap_to_add_later = np.array(self.algo1.inst.cap) - (np.array(self.algo1.inst.cap)*self.param)
+
         self.algo1.inst.cap = np.array(self.algo1.inst.cap)*self.param
         self.algo1.inst.cap = [math.ceil(x) for x in self.algo1.inst.cap]
+
         if not (self.algo1.run()):
             print(f"Finding solution failed. Number of filled bins: {len(self.algo1.bins)}")
             for bin in self.algo1.bins:
@@ -57,13 +60,14 @@ class bin_cap(Base.Base):
             print(f"Solution found. Number of filled bins: {len(self.algo1.bins)}")
             self.bins = self.algo1.bins.copy()
             return True
+        print(f"Solving second stage with {self.algo2.__class__.__name__}")
         self.algo2.load_instance(sys.argv[2])
         self.algo2.stage = 2
         self.algo2.bins = self.algo1.bins.copy()
         self.algo2.inst.items = self.algo1.inst.items.copy()
         self.algo2.inst.cap = cap_copy
         for bin in self.algo2.bins:
-            bin.capacity = np.array(bin.capacity) + cap_for_adding
+            bin.capacity = np.array(bin.capacity) + cap_to_add_later
         self.algo2.n_bins = self.algo1.inst.lower_bound*2
         self.algo2.run()
         self.bins = self.algo2.bins.copy()
